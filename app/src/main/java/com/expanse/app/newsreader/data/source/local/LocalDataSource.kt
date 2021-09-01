@@ -1,7 +1,6 @@
 package com.expanse.app.newsreader.data.source.local
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.expanse.app.newsreader.data.Result
 import com.expanse.app.newsreader.data.entities.NewsEntity
 import com.expanse.app.newsreader.data.source.NewsReaderDataSource
@@ -12,8 +11,8 @@ import kotlinx.coroutines.flow.flow
 class LocalDataSource internal constructor(
     private val newsReaderDAO: NewsReaderDAO) : NewsReaderDataSource {
 
-    override fun observeNewsEntity(): LiveData<Result<List<NewsEntity>>> {
-        return newsReaderDAO.observeNewsEntity().map { Result.Success(it) }
+    override fun observeNewsEntity(): LiveData<List<NewsEntity>> {
+        return newsReaderDAO.observeNewsEntity()
     }
 
     override suspend fun saveNewsEntity(newsEntity: NewsEntity) {

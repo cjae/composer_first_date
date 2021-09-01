@@ -1,4 +1,4 @@
-package com.expanse.app.newsreader.ui.components
+ package com.expanse.app.newsreader.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,21 +11,19 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun GenericDialog(
-  modifier: Modifier = Modifier,
-  onDismiss: () -> Unit,
-  title: String,
-  description: String? = null,
-  positiveAction: PositiveAction?,
-  negativeAction: NegativeAction?,
+    modifier: Modifier = Modifier,
+    onDismiss: () -> Unit,
+    title: String,
+    description: String? = null,
+    positiveAction: PositiveAction?,
+    negativeAction: NegativeAction?
 ) {
   AlertDialog(
     modifier = modifier,
     onDismissRequest = onDismiss,
     title = { Text(title) },
     text = {
-      if (description != null) {
-        Text(text = description)
-      }
+      if (description != null) { Text(text = description) }
     },
     buttons = {
       Row(
@@ -67,8 +65,7 @@ data class NegativeAction(
 )
 
 
-class GenericDialogInfo
-private constructor(builder: GenericDialogInfo.Builder){
+class GenericDialogInfo private constructor(builder: Builder) {
 
   val title: String
   val onDismiss: () -> Unit

@@ -14,7 +14,7 @@ class RemoteDataSource internal constructor(
     private val service: ServiceGenerator
 ): NewsReaderDataSource {
 
-    override fun observeNewsEntity(): LiveData<Result<List<NewsEntity>>> = MutableLiveData()
+    override fun observeNewsEntity(): LiveData<List<NewsEntity>> = MutableLiveData()
 
     override suspend fun saveNewsEntity(newsEntity: NewsEntity) {/*EMPTY BLOCK*/}
 

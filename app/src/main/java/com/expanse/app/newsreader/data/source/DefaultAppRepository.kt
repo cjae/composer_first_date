@@ -11,7 +11,7 @@ class DefaultAppRepository(
     private val localDataSource: NewsReaderDataSource
 ) : NewsReaderRepository {
 
-    override fun observeNewsEntity(): LiveData<Result<List<NewsEntity>>> =
+    override fun observeNewsEntity(): LiveData<List<NewsEntity>> =
         localDataSource.observeNewsEntity()
 
     override suspend fun saveNewsEntity(newsEntity: NewsEntity) =

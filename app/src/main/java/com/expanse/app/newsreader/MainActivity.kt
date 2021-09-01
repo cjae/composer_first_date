@@ -1,9 +1,11 @@
 package com.expanse.app.newsreader
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
@@ -22,19 +24,31 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MainContent(
-            viewModel,
-            onNavigateToBrowser = { url ->
-               Timber.d(url)
-            }) }
+        setContent {
+            MainContent(
+                viewModel,
+                onNavigateToBrowser = { url -> url?.let { showWebPage(it) } }
+            )
+        }
+    }
+
+    private fun showWebPage(url: String) {
+        val customTabsIntent = CustomTabsIntent.Builder()
+            .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
+            .build()
+
+        try { customTabsIntent.launchUrl(this, Uri.parse(url)) }
+        catch (e: Exception) {  Timber.e(e) }
     }
 }
 
 @Composable
 fun MainContent(
     viewModel: MainViewModel,
-    onNavigateToBrowser: (String) -> Unit) {
+    onNavigateToBrowser: (String?) -> Unit,
+) {
 
+    // fire a one-off event to get the data from api
     val onLoad = viewModel.onLoad.value
     if (!onLoad) {
         viewModel.onLoad.value = true

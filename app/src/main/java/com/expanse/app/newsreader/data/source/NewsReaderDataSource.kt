@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsReaderDataSource {
 
-    fun observeNewsEntity(): LiveData<Result<List<NewsEntity>>>
+    fun observeNewsEntity(): LiveData<List<NewsEntity>>
 
     suspend fun saveNewsEntity(newsEntity: NewsEntity)
 

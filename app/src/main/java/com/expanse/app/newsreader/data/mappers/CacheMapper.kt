@@ -8,13 +8,13 @@ class CacheMapper @Inject constructor() {
 
     fun mapToEntity(data: NewsItem): NewsEntity {
         return NewsEntity(
-            author = data.author,
-            title = data.title,
-            description = data.description,
-            url = data.url,
-            urlToImage = data.urlToImage,
-            publishedAt = data.publishedAt,
-            content = data.content
+            author = data.author ?: "",
+            title = data.title ?: "",
+            description = data.description ?: "",
+            url = data.url ?: "",
+            urlToImage = data.urlToImage ?: "",
+            publishedAt = data.publishedAt ?: "",
+            content = data.content ?: ""
         )
     }
 }

@@ -14,13 +14,13 @@ import com.expanse.app.newsreader.model.NewsItem
 @Composable
 fun NewsList(
     data: List<NewsItem>,
-    onNavigateToBrowser: (String) -> Unit
+    onNavigateToBrowser: (String?) -> Unit
 ){
     Box(modifier = Modifier.background(color = MaterialTheme.colors.surface)) {
-        if(data.isEmpty()){
+        if (data.isEmpty()) {
             EmptyView()
         } else {
-            LazyColumn(contentPadding = PaddingValues(top = 2.dp, bottom = 2.dp)){
+            LazyColumn(contentPadding = PaddingValues(top = 2.dp, bottom = 2.dp)) {
                 itemsIndexed(items = data) { _, newsItem ->
                     NewsCard(
                         newsItem = newsItem,
